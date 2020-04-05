@@ -20,4 +20,12 @@ interface Api {
         @Query("page")
         page: Int
     ): Call<MoviesResponse>
+
+    @GET("movie/upcoming")
+    fun getUpcomingMovies(
+        @Query("api_key")
+        apiKey: String = "45573754115aa294605178ed2769f617",
+        @Query("page")
+        page: Int
+    ): Call<MoviesResponse>
 }
