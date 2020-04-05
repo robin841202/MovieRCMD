@@ -10,7 +10,11 @@ interface Api {
         @Query("api_key")
         apiKey: String = "45573754115aa294605178ed2769f617",
         @Query("page")
-        page: Int
+        page: Int,
+        @Query("language")
+        language: String = "zh-TW",
+        @Query("region")
+        region: String = "TW"
     ): Call<MoviesResponse>
 
     @GET("movie/top_rated")
@@ -18,7 +22,11 @@ interface Api {
         @Query("api_key")
         apiKey: String = "45573754115aa294605178ed2769f617",
         @Query("page")
-        page: Int
+        page: Int,
+        @Query("language")
+        language: String = "zh-TW",
+        @Query("region")
+        region: String = "TW"
     ): Call<MoviesResponse>
 
     @GET("movie/upcoming")
@@ -26,6 +34,10 @@ interface Api {
         @Query("api_key")
         apiKey: String = "45573754115aa294605178ed2769f617",
         @Query("page")
-        page: Int
+        page: Int,
+        @Query("language")
+        language: String = "zh-TW",
+        @Query("region")
+        region: String = "TW"
     ): Call<MoviesResponse>
 }
