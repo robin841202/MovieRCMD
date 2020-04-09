@@ -1,5 +1,6 @@
 package com.example.robinhsueh.moviercmd
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -24,6 +25,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var rating: RatingBar
     private lateinit var releaseDate: TextView
     private lateinit var overview: TextView
+    private lateinit var score_text: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         rating = findViewById(R.id.movie_rating)
         releaseDate = findViewById(R.id.movie_release_date)
         overview = findViewById(R.id.movie_overview)
+        score_text = findViewById(R.id.score_text)
 
         val extras = intent.extras
 
@@ -52,6 +55,11 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .load("https://image.tmdb.org/t/p/w1280$backdropPath")
                 .transform(CenterCrop())
                 .into(backdrop)
+            backdrop.setOnClickListener {
+                val intent = Intent(this, ImageDisplay::class.java)
+                intent.putExtra(IMAGE_DISPLAY, backdropPath)
+                startActivity(intent)
+            }
         }
         val posterPath: String? = extras.getString(MOVIE_POSTER)
         if (posterPath != null){
@@ -59,9 +67,17 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .load("https://image.tmdb.org/t/p/w342$posterPath")
                 .transform(CenterCrop())
                 .into(poster)
+            poster.setOnClickListener {
+                val intent = Intent(this, ImageDisplay::class.java)
+                intent.putExtra(IMAGE_DISPLAY, posterPath)
+                startActivity(intent)
+            }
         }
+
         title.text = extras.getString(MOVIE_TITLE, "")
-        rating.rating = extras.getFloat(MOVIE_RATING,0f) /2
+        val score: Float = extras.getFloat(MOVIE_RATING,0f) /2
+        rating.rating = score
+        score_text.text = String.format("%.1f",score)
         releaseDate.text = extras.getString(MOVIE_RELEASE_DATE, "")
         overview.text = extras.getString(MOVIE_OVERVIEW,"")
     }

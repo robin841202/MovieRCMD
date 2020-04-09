@@ -90,8 +90,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/movie_poster_card"
+            app:layout_constraintEnd_toStartOf="@+id/score_text"
             app:layout_constraintStart_toStartOf="@+id/movie_poster_card"
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster_card"
+            app:layout_constraintBottom_toTopOf="@id/movie_poster_title_barrier"/>
+
+        <TextView
+            android:id="@+id/score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/movie_poster_title_barrier"
+            app:layout_constraintEnd_toEndOf="@+id/movie_poster_card"
+            app:layout_constraintStart_toEndOf="@+id/movie_rating"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_card" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private var popularMoviesPage = 1
     private var topRatedMoviesPage = 1
     private var upcomingMoviesPage = 1
+
+    private lateinit var pullToRefresh: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +66,16 @@ class MainActivity : AppCompatActivity() {
         getPopularMovies()
         getTopRatedMovies()
         getUpcomingMovies()
+
+        pullToRefresh = findViewById(R.id.pullToRefresh)
+        pullToRefresh.setOnRefreshListener {
+            getPopularMovies()
+            Log.d("MainActivity","onRefreshPopular")
+            getTopRatedMovies()
+            Log.d("MainActivity","onRefreshTopRated")
+            getUpcomingMovies()
+            Log.d("MainActivity","onRefreshUpcoming")
+            pullToRefresh.isRefreshing = false}
 
     }
 
