@@ -95,4 +95,31 @@ object MoviesRepository {
         })
     }
 
+    fun getSearchMovies(
+        page: Int,
+        keywords: String?,
+        onSuccess: (movies: List<Movie>) -> Unit,
+        onError: () -> Unit){
+        val call = api.getSearchMovies(page=page, keywords=keywords)
+        call.enqueue(object: Callback<MoviesResponse>{
+            override fun onResponse(
+                call: Call<MoviesResponse>,
+                response: Response<MoviesResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if (responseBody != null){
+                        onSuccess.invoke(responseBody.movies)
+                    }else{
+                        onError.invoke()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                onError.invoke()
+            }
+        })
+    }
+
 }

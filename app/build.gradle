@@ -29,6 +29,14 @@ android {
         }
     }
 
+// To inline the bytecode built with JVM target 1.8 into
+// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
+
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -56,11 +64,18 @@ dependencies {
     // Glide
     // https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //BottomNavigationView
+    //https://developer.android.com/reference/com/google/android/material/bottomnavigation/BottomNavigationView
+    implementation 'com.google.android.material:material:1.1.0'
+
 
     // SwipeRefreshLayout
     // https://developer.android.com/reference/androidx/swiperefreshlayout/widget/SwipeRefreshLayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'

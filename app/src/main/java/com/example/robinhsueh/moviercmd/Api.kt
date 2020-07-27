@@ -40,4 +40,14 @@ interface Api {
         @Query("region")
         region: String = "TW"
     ): Call<MoviesResponse>
+
+    @GET("search/movie")
+    fun getSearchMovies(
+        @Query("api_key")
+        apiKey: String = "45573754115aa294605178ed2769f617",
+        @Query("page")
+        page: Int,
+        @Query("query")
+        keywords: String?
+    ): Call<MoviesResponse>
 }
